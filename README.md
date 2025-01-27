@@ -6,5 +6,5 @@ native code dependencies to the other ink- modules.
 They are equivalent to builds produced from the open-source Ink C++ code hosted
 at https://github.com/google/ink.
 
-Imported from http://rapid/#/candidate/libink.so/libink.so_20241202_1028/libink.so_20241202_1028_RC00
-
+Imported from
+http://rapid/#/candidate/libink.so/libink.so_20250123_0751/libink.so_20250123_0751_RC00
