@@ -7,4 +7,4 @@ They are equivalent to builds produced from the open-source Ink C++ code hosted
 at https://github.com/google/ink.
 
 Imported from
-http://rapid/#/candidate/libink.so/libink.so_20250123_0751/libink.so_20250123_0751_RC00
+http://rapid/#/candidate/libink.so/libink.so_20250204_0842/libink.so_20250204_0842_RC00
