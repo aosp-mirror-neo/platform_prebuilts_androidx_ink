@@ -37,6 +37,8 @@ const char* BrushBehaviorNative_getDeveloperComment(int64_t native_ptr);
 
 int64_t BrushBehaviorNative_newCopyOfNode(int64_t native_ptr, int index);
 
+int BrushBehaviorNative_calculateMinimumRequiredVersion(int64_t native_ptr);
+
 #ifdef __cplusplus
 }  // extern "C"
 #endif
@@ -186,6 +188,17 @@ float PolarTargetNodeNative_getAngleRangeEnd(int64_t native_ptr);
 float PolarTargetNodeNative_getMagnitudeRangeStart(int64_t native_ptr);
 float PolarTargetNodeNative_getMagnitudeRangeEnd(int64_t native_ptr);
 
+// Calculate minimum required version:
+int NodeNative_calculateMinimumRequiredVersion(int64_t native_ptr);
+int SourceNodeNative_getSourceMinimumRequiredVersion(int source_int);
+int TargetNodeNative_getTargetMinimumRequiredVersion(int target_int);
+int PolarTargetNodeNative_getPolarTargetMinimumRequiredVersion(int target_int);
+int BinaryOpNodeNative_getOperationMinimumRequiredVersion(int operation_int);
+int OutOfRangeNative_calculateMinimumRequiredVersion(int out_of_range_int);
+int ProgressDomainNative_calculateMinimumRequiredVersion(int domain_int);
+int InterpolationNodeNative_getInterpolationMinimumRequiredVersion(
+    int interpolation_int);
+
 #ifdef __cplusplus
 }  // extern "C"
 #endif
@@ -230,6 +243,8 @@ int BrushCoatNative_getBrushPaintPreferencesCount(int64_t native_pointer);
 
 int64_t BrushCoatNative_newCopyOfBrushPaintPreference(int64_t native_pointer,
                                                       int index);
+
+int BrushCoatNative_calculateMinimumRequiredVersion(int64_t native_pointer);
 
 #ifdef __cplusplus
 }  // extern "C"
@@ -302,6 +317,7 @@ void InputModelNative_free(int64_t native_pointer);
 int64_t InputModelNative_getSlidingWindowDurationMillis(int64_t native_pointer);
 
 int InputModelNative_getSlidingUpsamplingFrequencyHz(int64_t native_pointer);
+int InputModelNative_calculateMinimumRequiredVersion(int64_t native_pointer);
 
 #ifdef __cplusplus
 }  // extern "C"
@@ -419,7 +435,8 @@ int64_t TilingTextureNative_create(
 int64_t StampingTextureNative_create(
     void* jni_env_pass_through, const char* client_texture_id,
     int animation_frames, int animation_rows, int animation_columns,
-    int64_t animation_duration_millis, int blend_mode,
+    int64_t animation_duration_millis, int animation_repeat_mode,
+    int blend_mode,
     void (*throw_from_status_callback)(void* jni_env, int status_code,
                                        const char* status_str));
 
@@ -446,6 +463,8 @@ int StampingTextureNative_getAnimationRows(int64_t native_ptr);
 int StampingTextureNative_getAnimationColumns(int64_t native_ptr);
 
 int64_t StampingTextureNative_getAnimationDurationMillis(int64_t native_ptr);
+
+int StampingTextureNative_getAnimationRepeatModeInt(int64_t native_ptr);
 
 int TilingTextureNative_getSizeUnitInt(int64_t native_ptr);
 
@@ -510,6 +529,17 @@ int64_t ColorFunctionNative_computeTransformedColorLong(
                                                            float, float,
                                                            float));
 
+int BrushPaintNative_calculateMinimumRequiredVersion(int64_t native_ptr);
+int BrushPaintNative_getBlendModeMinimumRequiredVersion(int blend_mode_int);
+int BrushPaintNative_getTextureWrapMinimumRequiredVersion(int wrap_int);
+int BrushPaintNative_getTextureOriginMinimumRequiredVersion(int origin_int);
+int BrushPaintNative_getTextureSizeUnitMinimumRequiredVersion(
+    int size_unit_int);
+int BrushPaintNative_getAnimationRepeatModeMinimumRequiredVersion(
+    int animation_repeat_mode_int);
+int TextureLayerNative_calculateMinimumRequiredVersion(int64_t native_ptr);
+int ColorFunctionNative_calculateMinimumRequiredVersion(int64_t native_ptr);
+
 #ifdef __cplusplus
 }  // extern "C"
 #endif
@@ -568,6 +598,8 @@ int64_t BrushTipNative_getParticleGapDurationMillis(int64_t native_ptr);
 int BrushTipNative_getBehaviorCount(int64_t native_ptr);
 
 int64_t BrushTipNative_newCopyOfBrushBehavior(int64_t native_ptr, int index);
+
+int BrushTipNative_calculateMinimumRequiredVersion(int64_t native_ptr);
 
 #ifdef __cplusplus
 }  // extern "C"
@@ -664,11 +696,71 @@ float EasingFunctionNative_getLinearPointY(int64_t native_ptr, int index);
 int EasingFunctionNative_getStepsCount(int64_t native_ptr);
 int EasingFunctionNative_getStepsPositionInt(int64_t native_ptr);
 
+int EasingFunctionNative_calculateMinimumRequiredVersion(int64_t native_ptr);
+int EasingFunctionNative_getStepPositionMinimumRequiredVersion(
+    int step_position_int);
+
 #ifdef __cplusplus
 }  // extern "C"
 #endif
 
 #endif  // THIRD_PARTY_INK_BRUSH_INTERNAL_JNI_EASING_FUNCTION_NATIVE_H_
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef THIRD_PARTY_INK_BRUSH_INTERNAL_JNI_INPUT_TOOL_TYPE_NATIVE_H_
+#define THIRD_PARTY_INK_BRUSH_INTERNAL_JNI_INPUT_TOOL_TYPE_NATIVE_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int InputToolTypeNative_calculateMinimumRequiredVersion(int tool_type_int);
+
+#ifdef __cplusplus
+}  // extern "C"
+#endif
+
+#endif  // THIRD_PARTY_INK_BRUSH_INTERNAL_JNI_INPUT_TOOL_TYPE_NATIVE_H_
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef THIRD_PARTY_INK_BRUSH_INTERNAL_JNI_SELF_OVERLAP_NATIVE_H_
+#define THIRD_PARTY_INK_BRUSH_INTERNAL_JNI_SELF_OVERLAP_NATIVE_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int SelfOverlapNative_calculateMinimumRequiredVersion(int self_overlap_int);
+
+#ifdef __cplusplus
+}  // extern "C"
+#endif
+
+#endif  // THIRD_PARTY_INK_BRUSH_INTERNAL_JNI_SELF_OVERLAP_NATIVE_H_
 // Copyright 2026 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
